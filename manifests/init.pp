@@ -212,9 +212,72 @@
 # == Author
 #   Alessandro Franceschi <al@lab42.it/>
 #
-class nagios inherits nagios::params {
+class nagios (
+  # $grouplogic            = params_lookup( 'grouplogic' ),
+  $install_prerequisites   = params_lookup('install_prerequisites'),
+  $nagiosadmin_password    = params_lookup('nagiosadmin_password'),
+  $nagiosadmin_email       = params_lookup('nagiosadmin_email'),
+  $nagiosadmins_members    = params_lookup('nagiosadmins_members'),
+  $check_external_commands = params_lookup( 'check_external_commands' ),
+  $plugins                 = params_lookup( 'plugins' ),
+  $use_ssl                 = params_lookup( 'use_ssl' ),
+  $cachedir                = params_lookup( 'cachedir' ),
+  $resourcefile            = params_lookup( 'resourcefile' ),
+  $statusfile              = params_lookup( 'statusfile' ),
+  $commandfile             = params_lookup( 'commandfile' ),
+  $resultpath              = params_lookup( 'resultpath' ),
+  $retentionfile           = params_lookup( 'retentionfile' ),
+  $p1file                  = params_lookup( 'p1file' ),
+  $nrpepluginpackage       = params_lookup( 'nrpepluginpackage' ),
+  $htpasswdfile            = params_lookup( 'htpasswdfile' ),
+  $my_class                = params_lookup( 'my_class' ),
+  $source                  = params_lookup( 'source' ),
+  $source_dir              = params_lookup( 'source_dir' ),
+  $source_dir_purge        = params_lookup( 'source_dir_purge' ),
+  $template                = params_lookup( 'template' ),
+  $service_autorestart     = params_lookup( 'service_autorestart' , 'global' ),
+  $options                 = params_lookup( 'options' ),
+  $version                 = params_lookup( 'version' ),
+  $absent                  = params_lookup( 'absent' ),
+  $disable                 = params_lookup( 'disable' ),
+  $disableboot             = params_lookup( 'disableboot' ),
+  $monitor                 = params_lookup( 'monitor' , 'global' ),
+  $monitor_tool            = params_lookup( 'monitor_tool' , 'global' ),
+  $monitor_target          = params_lookup( 'monitor_target' , 'global' ),
+  $puppi                   = params_lookup( 'puppi' , 'global' ),
+  $puppi_helper            = params_lookup( 'puppi_helper' , 'global' ),
+  $debug                   = params_lookup( 'debug' , 'global' ),
+  $audit_only              = params_lookup( 'audit_only' , 'global' ),
+  $package                 = params_lookup( 'package' ),
+  $service                 = params_lookup( 'service' ),
+  $service_status          = params_lookup( 'service_status' ),
+  $process                 = params_lookup( 'process' ),
+  $process_args            = params_lookup( 'process_args' ),
+  $process_user            = params_lookup( 'process_user' ),
+  $config_dir              = params_lookup( 'config_dir' ),
+  $config_file             = params_lookup( 'config_file' ),
+  $config_file_mode        = params_lookup( 'config_file_mode' ),
+  $config_file_owner       = params_lookup( 'config_file_owner' ),
+  $config_file_group       = params_lookup( 'config_file_group' ),
+  $config_file_init        = params_lookup( 'config_file_init' ),
+  $pid_file                = params_lookup( 'pid_file' ),
+  $data_dir                = params_lookup( 'data_dir' ),
+  $log_dir                 = params_lookup( 'log_dir' ),
+  $log_file                = params_lookup( 'log_file' )
+  ) inherits nagios::params {
 
-  $customconfigdir = "${config_dir}/auto.d"
+  $bool_install_prerequisites = any2bool($install_prerequisites)
+  $bool_check_external_commands=any2bool($check_external_commands)
+  $bool_source_dir_purge=any2bool($source_dir_purge)
+  $bool_service_autorestart=any2bool($service_autorestart)
+  $bool_absent=any2bool($absent)
+  $bool_disable=any2bool($disable)
+  $bool_disableboot=any2bool($disableboot)
+  $bool_monitor=any2bool($monitor)
+  $bool_puppi=any2bool($puppi)
+  $bool_debug=any2bool($debug)
+  $bool_audit_only=any2bool($audit_only)
+  $customconfigdir = "${config_dir}/auto.d" 
 
   ### Definition of some variables used in the module
   $manage_package = $nagios::bool_absent ? {
