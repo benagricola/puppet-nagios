@@ -228,7 +228,7 @@ class nagios (
   $resultpath              = params_lookup( 'resultpath' ),
   $retentionfile           = params_lookup( 'retentionfile' ),
   $p1file                  = params_lookup( 'p1file' ),
-  $nagios_filemode         = params_lookup( 'nagios_filemode' ),
+  $filemode                = params_lookup( 'filemode' ),
   $nrpepluginpackage       = params_lookup( 'nrpepluginpackage' ),
   $htpasswdfile            = params_lookup( 'htpasswdfile' ),
   $my_class                = params_lookup( 'my_class' ),
@@ -397,7 +397,7 @@ class nagios (
   include nagios::target
   # Collects all the stored configs regarding nagios
   # Host/Service Checks aggregation policy is based on $nagios_filemode
-  case $nagios_filemode {
+  case $nagios::filemode {
     'concat': {
       # One file per host with all the relevant services in auto.d/hosts
       # Concatenated with puppetlabs-concat

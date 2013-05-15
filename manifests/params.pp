@@ -21,7 +21,7 @@ class nagios::params {
   $nagiosadmin_email = 'root@localhost'
   $nagiosadmins_members = 'nagiosadmin'
 
-  $nagios_filemode = 'concat'
+  $filemode = 'concat'
   $grouplogic = ''
 
   $check_external_commands = true
