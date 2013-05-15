@@ -71,7 +71,7 @@ define service {
 define service {
     host_name           <%= host_name %>
     service_description YUM_Updates
-    check_command       check_nrpe!check_yum!noarg
+    check_command       check_nrpe!check_yum!-v
     use                 <%= use %>
 }
 <% end -%>
