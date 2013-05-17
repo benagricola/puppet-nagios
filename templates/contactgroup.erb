@@ -1,6 +1,6 @@
 # File Managed by Puppet
 define contactgroup{
-        contactgroup_name               <%= @name %>
-        alias                           <%= @alias %>
-        members                         <%= @members %>
-        }
+    contactgroup_name               <%= scope.lookupvar('name') %>
+    alias                           <%= scope.lookupvar('alias') %>
+    members                         <%= scope.lookupvar('members') %>
+}

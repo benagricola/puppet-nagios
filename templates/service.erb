@@ -1,7 +1,7 @@
 
 define service {
-    host_name           <%= host_name %>
-    service_description <%= real_service_description %>
-    check_command       <%= real_check_command %>
-    use                 <%= use %>
+    host_name           <%= scope.lookupvar('host_name') %>
+    service_description <%= scope.lookupvar('real_service_description') %>
+    check_command       <%= scope.lookupvar('real_check_command') %>
+    use                 <%= scope.lookupvar('use') %>
 }
